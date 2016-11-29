@@ -1,16 +1,37 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+
+<!-- ng-app - diretiva do Angular : escopo de atuação do Angular. Utilizaremos o Angular, gerenciaremos a página inteira: a tag html e todos seus elementos filhos.
+view: carregar/iniciar o módulo principal da aplicação  -->
+<html lang="pt-br" ng-app="alurapic">
+    
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Alurapic</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+        
+        <!-- o core do Angular -->
         <script src="js/lib/angular.min.js"></script> 
+        
+        <!-- carrega o modulo principal da aplicação 
+         módulo que é o primeiro a ser inicializado assim que sua página é carregada pela primeira vez, inclusive ele também é o responsável pelo carregamento de outros módulos de que sua aplicação precisa para funcionar. -->
+        <script src="js/main.js"></script>
+
+        <!-- controller para trazer os dados do model e preencher a angular expression -->
+        <script src="js/controllers/fotos-controller.js"></script>
+
     </head>
-    <body>
-        <div class="container">
+
+    <!--  queremos que o controller gerencie a tag body e todos os seus elementos filhos e fazemos isso através da diretiva ng-controller -->
+    <body ng-controller="FotosController">
             <h1 class="text-center">Alurapic</h1>
+
+            <!-- class: escale corretamente nos mais diversos dispositivos:-->
+            <!-- abrimos lacunas - angular expression em nossa view - template -->   
+            <!-- dado disponibilizado por um controller para a view: data binding (associação/ligação de dados). qq alteração no dado do controller dispara uma atualização da view sem que o desenvolvedor tenha que se preocupar ou intervir no processo. -->
+            <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+
         </div> <!-- fim container -->        
     </body>
 </html>
