@@ -25,13 +25,22 @@ view: carregar/iniciar o módulo principal da aplicação  -->
 
     <!--  queremos que o controller gerencie a tag body e todos os seus elementos filhos e fazemos isso através da diretiva ng-controller -->
     <body ng-controller="FotosController">
-            <h1 class="text-center">Alurapic</h1>
-
-            <!-- class: escale corretamente nos mais diversos dispositivos:-->
-            <!-- abrimos lacunas - angular expression em nossa view - template -->   
-            <!-- dado disponibilizado por um controller para a view: data binding (associação/ligação de dados). qq alteração no dado do controller dispara uma atualização da view sem que o desenvolvedor tenha que se preocupar ou intervir no processo. -->
-            <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="text-center">Alurapic</h1>
+            </div>
+            <div class="panel panel-default" ng-repeat="foto in fotos"><!--diretiva q repete a criação de uma marcação p/ uma determinada lista  -->
+                <div class="panel-heading">
+                    <h3 class="panel-title text-center">{{foto.titulo}}</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- class: escale corretamente nos mais diversos dispositivos:-->
+                    <!-- abrimos lacunas - angular expression em nossa view - template -->   
+                    <!-- dado disponibilizado por um controller para a view: data binding (associação/ligação de dados). qq alteração no dado do controller dispara uma atualização da view sem que o desenvolvedor tenha que se preocupar ou intervir no processo. -->
+                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+                </div><!-- fim panel-body -->
+            </div><!-- fim panel panel-default -->
         </div> <!-- fim container -->        
     </body>
 </html>
+
