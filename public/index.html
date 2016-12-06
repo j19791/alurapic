@@ -5,14 +5,24 @@ view: carregar/iniciar o módulo principal da aplicação  -->
 <html lang="pt-br" ng-app="alurapic">
     
     <head>
+
+        <base href="/"><!--podemos remover o hash e acessar a URL diretamente:-->
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <title>Alurapic</title>
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+        <link rel="stylesheet" href="css/efeitos.css">
         
         <!-- o core do Angular -->
         <script src="js/lib/angular.min.js"></script> 
+
+        <script src="js/lib/angular-animate.min.js"></script>
+
+        <!--  configuração das rotas-->
+         <script src="js/lib/angular-route.min.js"></script>
         
         <!-- carrega o modulo principal da aplicação 
          módulo que é o primeiro a ser inicializado assim que sua página é carregada pela primeira vez, inclusive ele também é o responsável pelo carregamento de outros módulos de que sua aplicação precisa para funcionar. -->
@@ -21,25 +31,50 @@ view: carregar/iniciar o módulo principal da aplicação  -->
         <!-- controller para trazer os dados do model e preencher a angular expression -->
         <script src="js/controllers/fotos-controller.js"></script>
 
+        <!-- módulo que contém as diretivas criadas -->
+        <script src="js/directives/minhas-diretivas.js"></script>
+
     </head>
 
     <!--  queremos que o controller gerencie a tag body e todos os seus elementos filhos e fazemos isso através da diretiva ng-controller -->
-    <body ng-controller="FotosController">
+    <body ><!--ng-controller="FotosController"-->
         <div class="container">
-            <div class="jumbotron">
+            <ng-view></ng-view> <!-- lacuna que recebe o conteúdo de outras páginas -->
+            <!--<div class="jumbotron">
                 <h1 class="text-center">Alurapic</h1>
-            </div>
-            <div class="panel panel-default" ng-repeat="foto in fotos"><!--diretiva q repete a criação de uma marcação p/ uma determinada lista  -->
-                <div class="panel-heading">
+            </div>--><!--encaminhado p/ view parcial principal.html>-->
+
+            <!-- a row com o campo de busca -->
+            <!--<div class="row">
+                <div class="col-md-12">
+                <form>
+                     <input class="form-control" 
+                            placeholder="filtrar pelo título da foto" 
+                            ng-model="filtro" ng-model-options="{ debounce: 500 }">--><!-- com base no que o usuário digitar, elaboraremos a estratégia de busca. queremos um data binding bidirecional, capaz de ler de $scope e atualizar seu valor de acordo com a entrada. debounce: 500 Realizar um pequeno atraso (delay) na entrada do usuário. A cada dígito do usuário, vamos aguardar meio segundo (500ms) para que o framework atualize o valor de $scope.filtro e filtre nossa lista.-->
+                <!--</form>
+                </div> 
+            </div> --> <!--encaminhado p/ view parcial principal.html>-->
+
+
+            <!--<div class="row">
+                
+                <meu-painel class="col-md-2 painel-animado" ng-repeat="foto in fotos | filter: filtro" titulo="{{foto.titulo}}">--><!-- uso da nossa diretiva -->
+                    <!-- A diretiva ng-repeat aceita receber um filtro através da propriedade filter -->
+                    <!--<img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
+                </meu-painel>
+            </div>-->
+
+            <!--<div class="panel panel-default" ng-repeat="foto in fotos">--><!--ng-repeat :diretiva q repete a criação de uma marcação p/ uma determinada lista  -->
+                <!--<div class="panel-heading">
                     <h3 class="panel-title text-center">{{foto.titulo}}</h3>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body">-->
                     <!-- class: escale corretamente nos mais diversos dispositivos:-->
                     <!-- abrimos lacunas - angular expression em nossa view - template -->   
                     <!-- dado disponibilizado por um controller para a view: data binding (associação/ligação de dados). qq alteração no dado do controller dispara uma atualização da view sem que o desenvolvedor tenha que se preocupar ou intervir no processo. -->
-                    <img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">
-                </div><!-- fim panel-body -->
-            </div><!-- fim panel panel-default -->
+                    <!--<img class="img-responsive center-block" src="{{foto.url}}" alt="{{foto.titulo}}">-->
+                <!--</div>--><!-- fim panel-body -->
+            <!--</div>--><!-- fim panel panel-default -->
         </div> <!-- fim container -->        
     </body>
 </html>

@@ -13,6 +13,8 @@ angular.module('alurapic').controller('FotosController', function($scope, $http)
 
     $scope.fotos = [];
 
+    $scope.filtro = ''; //propriedade que guardará o texto digitado pelo usuário. Toda vez q o usuário digitar neste campo, a propriedade $scope.filtro será atualizada
+
     //realizar uma requisição assíncrona para o endpoint v1/fotos - Toda requisição assíncrona é incerta, não sabemos quanto tempo ela demorará para ser executada e se realmente será bem sucedida.
     
     /*var promise = $http.get('/v1/fotos');//$http.get nos retorna é uma promessa de que ele buscará os dados
