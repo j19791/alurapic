@@ -53,4 +53,15 @@ angular.module('minhasDiretivas', [])
 
         return ddo;
 
+    })
+.directive('meuBotaoPerigo', function() {
+        var ddo = {};
+        ddo.restrict = "E";
+        ddo.scope = {
+            nome: '@', //@ realiza uma cópia do valor passado para a diretiva, guardando-a no escopo isolado como string
+            acao : '&' //o valor de acao é uma expressão que deve ser avaliada no contexto do controller.
+        }
+        ddo.template = '<button class="btn btn-danger btn-block" ng-click="acao()">{{nome}}</button>';
+
+        return ddo;
     });

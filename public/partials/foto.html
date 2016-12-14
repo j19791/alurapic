@@ -1,1 +1,58 @@
-<h1>Cadastro</h1>
+<div class="page-header text-center">
+    <h1>{{foto.titulo | uppercase}}</h1><!--ma AE não avaliada não resulta em erro, mas apenas na ausência de valor -->
+</div>
+
+<p ng-show="mensagem.length" class="alert alert-info">{{mensagem}}</p><!--mensagem de fracasso ou sucesso para indicar o status da operação com o servidor.-->
+
+
+<form novalidate name="formulario" class="row" ng-submit="submeter()"><!--p/ lidarmos com o evento submit disparado pelo formulário -->
+    <!--novalidate : abdica do sistema de validação do HTML5-->
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>Título</label>
+            <input name="titulo" class="form-control" ng-model="foto.titulo" required ng-maxlength="20"> <!-- campo obrigatório -->   
+        	<span class="form-control alert-danger" ng-show = "formulario.$submitted && formulario.titulo.$error.required"><!-- ng-show permite a exibição condicional de elementos da tela. formulario.titulo.$error.required qdo seu valor é true, o elemento no qual a diretiva está aplicada é exibida. formulario.$submitted q retorna verdadeiro apenas se o formulário foi submetido.-->
+                Título obrigatório <!--mensagens de validação -->
+            </span>
+            <span ng-show="formulario.$submitted && formulario.titulo.$error.maxlength" class="form-control alert-danger">
+                No máximo 20 caracteres!
+            </span> 
+        </div>
+        <div class="form-group">
+            <label>URL</label>
+            <input name="url" class="form-control" ng-model="foto.url" required><!-- campo obrigatório -->  
+            <span ng-show = "formulario.$submitted && formulario.url.$error.required" 
+                class="form-control alert-danger">
+                URL obrigatória
+            </span> 
+        </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <textarea name="descricao" class="form-control" ng-model="foto.descricao">
+            </textarea>
+        </div>
+
+		<div class="form-group">
+            <label>Grupo</label>
+            <select name="grupo" 
+                    ng-model="foto.grupo" class="form-control" required
+                    ng-controller="GruposController"
+                    ng-options="grupo._id as (grupo.nome | uppercase) for grupo in grupos"><!-- "grupo._id as grupo.nome" indica que o valor do elemento será o ID do grupo e o que será exibido para seleção será seu nome. O restante "for grupo in grupos" percorrerá a lista de grupos disponibilizada no escopo do controller, construindo cada item de nossa lista. o filtro uppercase (grupo.nome | uppercase) -->
+                <option value="">Escolha um grupo</option>
+            </select>
+            <span ng-show="formulario.$submitted && formulario.grupo.$error.required" class="form-control alert-danger">
+                Grupo obrigatório
+            </span>
+        </div>
+
+     <button type="submit" class="btn btn-primary" ng-disabled="formulario.$invalid"> <!--habilitando a exibição do botão salvar apenas se o formulário estiver válido.-->
+            Salvar
+	</button>
+         <a href="/" class="btn btn-primary">Voltar</a>
+        <hr>
+    </div>
+    <div class="col-md-6">
+         <minha-foto url="{{foto.url}}" titulo="{{foto.titulo}}">
+        </minha-foto>
+    </div>
+</form>

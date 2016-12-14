@@ -23,6 +23,10 @@ view: carregar/iniciar o módulo principal da aplicação  -->
 
         <!--  configuração das rotas-->
          <script src="js/lib/angular-route.min.js"></script>
+
+        <!--A ideia é substituirmos $http por este serviço para tornar nossa aplicação mais enxuta e fácil de manter.
+        utilizando endpoints REST no nosso back-end, o $http acaba não conseguindo esconder a complexidade deste tipo de serviço -->
+        <script src="js/lib/angular-resource.min.js"></script>
         
         <!-- carrega o modulo principal da aplicação 
          módulo que é o primeiro a ser inicializado assim que sua página é carregada pela primeira vez, inclusive ele também é o responsável pelo carregamento de outros módulos de que sua aplicação precisa para funcionar. -->
@@ -31,8 +35,17 @@ view: carregar/iniciar o módulo principal da aplicação  -->
         <!-- controller para trazer os dados do model e preencher a angular expression -->
         <script src="js/controllers/fotos-controller.js"></script>
 
+        <!-- controller que nos dê suporte para a operação de cadastro.-->
+        <script src="js/controllers/foto-controller.js"></script>
+
+        <!-- cntroller para carregar os grupos em salvar/editar-->
+        <script src="js/controllers/grupos-controller.js"></script>
+
         <!-- módulo que contém as diretivas criadas -->
         <script src="js/directives/minhas-diretivas.js"></script>
+
+        <!-- serviço recursoFoto para Quando precisamos utilizar um mesmo recurso em diversos controllers diferentes,  através de injeção de dependência. -->
+        <script src="js/services/meus-servicos.js"></script>
 
     </head>
 
